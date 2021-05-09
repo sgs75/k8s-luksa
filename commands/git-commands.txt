@@ -1,11 +1,17 @@
--- Инициальзация
+-- Инициализация
 git init
+
+-- Текущий статус
+git status
 
 -- Добавить файлы в локальный репозиторий
 git add .
 
 -- Commit changes with text message
 git commit -m "text message"
+
+-- Commit в дополнение к последнему закоммиченному
+git commit -m "comment" --amend
 
 -- Branches list
 git branch
