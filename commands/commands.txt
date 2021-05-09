@@ -1,0 +1,102 @@
+minikube start
+minikube status
+minikube stop
+
+minikube start --extra-config=apiserver.Features.EnableSwaggerUI=true
+-- запуск с включенным swagger
+
+minikube kubectl get pods
+
+minikube dashboard
+
+Дока по minikube
+https://kubernetes.io/ru/docs/tutorials/hello-minikube/
+
+kubectl get ns - список namespaces
+kubectl get pods --all-namespaces - получить список модулей во всех пространствах имен
+kubectl get pods --namespace kube-system - получить список подов в конкретном пространстве имен
+kubectl get endpoints kubia - список endpoints
+
+-- Наблюдение за списком подов
+kubectl get pods --watch
+
+-- Удаление пода
+kubectl delete pod kubia3
+
+kubectl exec -it kubia bash - запуск оболочки bash в контейнере
+kubectl exec kubia-2r1qb -- touch /var/ready - выполнение команды в контейнере
+exec -it kube-proxy-kkxt9 --namespace kube-system cat /var/lib/kube-proxy/config.conf
+
+-- kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' - не сработало;
+kubectl get nodes -o jsonpath='{.items[*].status.addresses[*].address}' - работает
+
+kubectl create -f kubia-ingress-tls.yaml - создание ресурса из описания в файле
+kubectl create -f "D:\Projects\minikube\object.yaml"
+kubectl apply -f kubia-ingress-tls.yaml - обновление ресурса, вместо необходимости его удаления и создания заново
+
+curl -k -v https://kubia.example.com/kubia - использование утилиты curl
+
+kubectl run dnsutils --image=tutum/dnsutils --generator=run-pod/v1 --command -- sleep infinity - прямое создание модуля без написания манифеста yaml
+kubectl exec dnsutils nslookup kubia - поиск в DNS
+
+Проброс порта и обращение извне кластера:
+kubectl port-forward fortune 8080:80
+curl http://localhost:8080
+
+while true; do curl http://130.211.109.222; done
+бесконечный цикл
+
+kubectl rolling-update kubia-v1 kubia-v2 --image=luksa/kubia:v2 --v 6
+опция подробного ведения лога "--v 6"
+
+kubectl rollout status deployment kubia
+вывод статуса deployment
+
+Размерности объема хранения:
+1 Mi = 1 Мебибайт = ?
+
+--- разделение объектов в одном файле yaml
+Объект List для описания списка объектов (kind: List apiVersion: v1)
+
+-- Список компонент kubernetes, работающих как модули
+kubectl get po -o custom-columns=POD:metadata.name,NODE:spec.nodeName --sort-by spec.nodeName -n kube-system
+kubectl get po -o custom-columns=POD:metadata.name,NODE:spec.nodeName --sort-by metadata.name -n kube-system
+
+-- Командная строка пода etcd в minikube
+kubectl exec -it --namespace kube-system etcd-minikube sh
+
+-- Troubleshooting
+-- Кто потребляет ЦП и память в контейнере
+kubectl exec -it requests-pod top
+
+-- Наблюдение за компонентами
+kubectl get pods --watch
+kubectl get pods -o yaml --watch
+
+-- 
+kubectl run nginx --image=nginx
+docker ps
+
+Servie Accounts
+kubectl get sa
+kubectl create serviceaccount foo
+kubectl describe sa foo
+kubectl describe secret foo-token-gvq95
+
+kubectl create -f curl-custom-sa.yaml
+kubectl exec curl-custom-sa -c main -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+
+-- Исследование нод
+kubectl describe nodes
+
+-- Под утилизатор ресурсов
+kubectl run requests-pod-2 --image=busybox --restart Never --requests="cpu=800m,memory=20Mi" -- dd if=/dev/zero of=/dev/null
+kubectl run requests-pod-3 --image=busybox --restart Never --requests="cpu=1,memory=20Mi" -- dd if=/dev/zero of=/dev/null
+
+-- Addons
+minikube addons list
+
+kubectl top node
+kubectl top pod --all-namespaces
+
+

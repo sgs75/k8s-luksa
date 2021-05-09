@@ -1,0 +1,5 @@
+-- Make empty file
+cd.>README.md
+
+-- Добавить переменную в PATH
+set PATH="%PATH%;C:\OpenSSL\bin"

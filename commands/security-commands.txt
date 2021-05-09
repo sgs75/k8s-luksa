@@ -1,0 +1,25 @@
+kubectl run pod-with-defaults --image alpine --restart Never -- /bin/sleep 999999
+
+Идентификация контейнера, ключевые параметры
+kubectl exec pod-with-defaults -- id
+
+kubectl create clusterrole psp-default --verb=use --resource=podsecuritypolicies --resource-name=default
+
+kubectl create clusterrole psp-privileged --verb=use --resource=podsecuritypolicies --resource-name=privileged
+
+kubectl create clusterrolebinding psp-all-users --clusterrole=psp-default --group=system:authenticated
+
+kubectl create clusterrolebinding psp-bob --clusterrole=psp-privileged --user=bob
+
+kubectl config set-credentials alice --username=alice --password=alice
+
+kubectl config set-credentials bob --username=bob --password=bob
+
+kubectl --user alice create -f pod-privileged.yaml
+
+
+
+
+
+
+
