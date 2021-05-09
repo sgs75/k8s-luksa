@@ -32,6 +32,9 @@ git checkout branch-name
 -- Отправить в удаленный репозиторий изменения из branch
 git push origin branch-name
 
+-- Забрать изменения из удаленного репозитория
+git pull
+
 -- Links
 https://github.com/sgs75/k8s-luksa
 https://habr.com/ru/post/273897/
