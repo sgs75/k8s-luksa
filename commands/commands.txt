@@ -103,3 +103,4 @@ kubectl top pod --all-namespaces
 kubectl cluster-info
 kubectl cluster-info dump > cluster-dump
 
+minikube service monitoring-grafana -n kube-system
