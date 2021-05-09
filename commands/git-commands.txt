@@ -32,3 +32,8 @@ git checkout branch-name
 -- Отправить в удаленный репозиторий изменения из branch
 git push origin branch-name
 
+-- Links
+https://github.com/sgs75/k8s-luksa
+https://habr.com/ru/post/273897/
+https://proglib.io/p/git-for-half-an-hour/
+http://loco.ru/materials/272-github-ispolzovanie-vetok-branches
