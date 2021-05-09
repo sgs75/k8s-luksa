@@ -99,4 +99,7 @@ minikube addons list
 kubectl top node
 kubectl top pod --all-namespaces
 
+-- Информация о кластере
+kubectl cluster-info
+kubectl cluster-info dump > cluster-dump
 
