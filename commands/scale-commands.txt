@@ -1,0 +1,7 @@
+kubectl autoscale deployment kub-tutum --cpu-percent=30 --min=1 --max=5
+
+kubectl get hpa
+
+kubectl describe hpa kub-tutum
+
+kubectl describe deployment kub-tutum
