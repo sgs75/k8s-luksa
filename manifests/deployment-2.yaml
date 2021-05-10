@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kub-tutum
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubpod
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubpod
+    spec:
+      containers:
+      - name: main
+        image: tutum/curl
+        command: ["sleep", "9999999"]
+        resources:
+          limits:
+            cpu: 200m
+            memory: 20Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
