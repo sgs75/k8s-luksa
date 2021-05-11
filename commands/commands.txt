@@ -104,3 +104,6 @@ kubectl cluster-info
 kubectl cluster-info dump > cluster-dump
 
 minikube service monitoring-grafana -n kube-system
+
+-- Выполнение приложения до команды завершения Ctrl-C; к процессу прикреплена консоль; модуль по завершении выполнения будет удален
+kubectl run -it --rm --restart=Never loadgenerator --image=busybox -- sh -c "while true; do wget -O - -q http://kubia.default; done"
