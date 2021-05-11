@@ -5,3 +5,7 @@ kubectl get hpa
 kubectl describe hpa kub-tutum
 
 kubectl describe deployment kub-tutum
+
+kubectl expose deployment kub-tutum --port=80 --target-port=8080
+
+kubectl run -it --rm --restart=Never loadgenerator --image=busybox -- sh -c "while true; do wget -O - -q http://kubia.default; done"
