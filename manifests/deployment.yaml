@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubpod
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubpod
+    spec:
+      containers:
+      - image: luksa/kubia:v1
+        name: nodejs
+        resources:
+          limits:
+            cpu: 200m
+            memory: 20Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
