@@ -5,7 +5,9 @@ minikube stop
 minikube start --extra-config=apiserver.Features.EnableSwaggerUI=true
 -- запуск с включенным swagger
 
-minikube kubectl get pods
+-- Получить список подов и расширенный список подов
+kubectl get pods
+kubectl get po -o wide
 
 minikube dashboard
 
@@ -104,3 +106,14 @@ kubectl cluster-info
 kubectl cluster-info dump > cluster-dump
 
 minikube service monitoring-grafana -n kube-system
+
+-- Выполнение приложения до команды завершения Ctrl-C; к процессу прикреплена консоль; модуль по завершении выполнения будет удален
+kubectl run -it --rm --restart=Never loadgenerator --image=busybox -- sh -c "while true; do wget -O - -q http://kubia.default; done"
+
+-- Мониторинг
+-- Фактическое потребление CPU и памяти узлами и модулями
+kubectl top node
+kubectl top pod
+kubectl top pod --all-namespaces
+-- Запросы и лимиты по CPU и памяти
+kubectl describe node
