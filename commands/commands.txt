@@ -117,3 +117,17 @@ kubectl top pod
 kubectl top pod --all-namespaces
 -- Запросы и лимиты по CPU и памяти
 kubectl describe node
+
+-- Autoscaling
+kubectl autoscale deployment kubia-3 --cpu-percent=30 --min=1 --max=5
+kubectl get hpa
+kubectl describe hpa kubia-3
+kubectl get hpa.v2beta1.autoscaling kubia-3 -o yaml
+kubectl expose deployment kubia-3 --port=80 --target-port=8080
+kubectl get deployment kubia-3 --watch
+kubectl get hpa --watch
+kubectl run -it --rm --restart=Never loadgenerator --image=busybox -- sh -c "while true; do wget -O - -q http://kubia-3.default; done"
+-- Nodes
+kubectl cordon <node> -- пометить узел как неназначаемый
+kubectl drain <node> -- пометить узел как неназначаемый и вытеснить модули
+kubectl uncordon <node> -- разблокировать узел
