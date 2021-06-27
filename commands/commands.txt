@@ -131,3 +131,9 @@ kubectl run -it --rm --restart=Never loadgenerator --image=busybox -- sh -c "whi
 kubectl cordon <node> -- пометить узел как неназначаемый
 kubectl drain <node> -- пометить узел как неназначаемый и вытеснить модули
 kubectl uncordon <node> -- разблокировать узел
+
+-- Taints, affinity
+kubectl taint node node1.k8s node-type=production:NoSchedule
+-- Node affinity
+kubectl label node minikube gpu=true
+kubectl get nodes -l gpu=true
