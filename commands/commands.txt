@@ -137,3 +137,7 @@ kubectl taint node node1.k8s node-type=production:NoSchedule
 -- Node affinity
 kubectl label node minikube gpu=true
 kubectl get nodes -l gpu=true
+
+-- Init containers
+-- Посмотреть логи контейнера пода
+kubectl logs fortune-client -c init
